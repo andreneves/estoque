@@ -38,7 +38,13 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd('STORE');
+        $produto = new Produto;
+        $produto->nome          = 'Shampoo';
+        $produto->quantidade    = 10;
+        $produto->valor         = 10;
+        $produto->save();
+
     }
 
     /**
@@ -72,9 +78,17 @@ class ProdutoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        //dd('UPDATE');
+        $produto = Produto::find(4);
+        $produto->nome          = 'Shampoo Clear Men';
+        $produto->quantidade    = 20;
+        $produto->valor         = 200;
+        $produto->save();
+
+        //dd($produto);
+
     }
 
     /**
@@ -85,6 +99,8 @@ class ProdutoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $produto = Produto::find($id);
+        $produto->delete();
+        //dd('DESTROY');
     }
 }
