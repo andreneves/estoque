@@ -15,9 +15,9 @@ class ProdutoController extends Controller
     public function index()
     {
         //listar todos os produtos
-        //dd('ENTROU NO INDEX');
+
         $produtos = Produto::orderBy('nome', 'ASC')->get();
-        dd($produtos);
+        return view('produto.produto_index', ['produtos' => $produtos]);
     }
 
     /**
