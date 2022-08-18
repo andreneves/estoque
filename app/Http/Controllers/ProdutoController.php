@@ -27,7 +27,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        return view('produto.produto_create');
     }
 
     /**
@@ -38,12 +38,15 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //dd('STORE');
+        //dd($request->all());
+        
         $produto = new Produto;
-        $produto->nome          = 'Shampoo';
-        $produto->quantidade    = 10;
-        $produto->valor         = 10;
+        $produto->nome          = $request->nome;
+        $produto->quantidade    = $request->quantidade;
+        $produto->valor         = $request->valor;
         $produto->save();
+
+        return redirect('/produto')->with('status', 'Produto criado com sucesso!');
 
     }
 
@@ -57,7 +60,9 @@ class ProdutoController extends Controller
     {
         //dd('ENTROU NO SHOW');
         $produto = Produto::find($id);
-        dd($produto);
+        //dd($produto);
+        return view('produto.produto_show', ['produto' => $produto]);
+
     }
 
     /**

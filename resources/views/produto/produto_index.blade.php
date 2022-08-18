@@ -11,6 +11,15 @@
 @endsection
  
 @section('content')
+
+@if (session('status'))
+    <div class="alert alert-success" role="alert">
+        {{ session('status') }}
+    </div>
+@endif
+
+<a href="{{ url('produto/create') }}">CRIAR</a>
+
     <p>Conteúdo</p>
 
     <table>
@@ -18,6 +27,7 @@
           <th>nome</th>
           <th>quantidade</th>
           <th>valor</th>
+          <th></th>
         </tr>
 
         @foreach ($produtos as $value)
@@ -25,6 +35,7 @@
             <td>{{ $value->nome         }}</td>
             <td>{{ $value->quantidade   }}</td>
             <td>{{ $value->valor        }}</td>
+            <td><a href="{{ url('produto/' . $value->id) }}">Visualizar</a></td>
         </tr>
         @endforeach
 
