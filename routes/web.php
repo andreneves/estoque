@@ -18,15 +18,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//CRUD
 
 //listar todos os produtos
 Route::get('/produto', [ProdutoController::class, 'index'])->name('produto.index');
 
 // create
 Route::get('/produto/create', [ProdutoController::class, 'create'])->name('produto.create');
-
 // store
 Route::post('/produto/create', [ProdutoController::class, 'store'])->name('produto.store');
+
+//edit
+Route::get('/produto/{id}/edit', [ProdutoController::class, 'edit'])->name('produto.edit');
+// update
+Route::put('/produto/{id}', [ProdutoController::class, 'update'])->name('produto.update');
+
+// delete
+
+Route::delete('/produto/{id}', [ProdutoController::class, 'destroy'])->name('produto.delete');
+
+
+
 
 
 //exibe um produto

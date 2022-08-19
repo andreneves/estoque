@@ -28,6 +28,8 @@
           <th>quantidade</th>
           <th>valor</th>
           <th></th>
+          <th></th>
+          <th></th>
         </tr>
 
         @foreach ($produtos as $value)
@@ -36,6 +38,12 @@
             <td>{{ $value->quantidade   }}</td>
             <td>{{ $value->valor        }}</td>
             <td><a href="{{ url('produto/' . $value->id) }}">Visualizar</a></td>
+            <td><a href="{{ url('produto/' . $value->id . '/edit') }}">Editar</a></td>
+            <td>
+                {!! Form::open(['url' => 'produto/' . $value->id, 'method' => 'delete']) !!}
+                {{ Form::submit('DELETAR') }}
+                {!! Form::close() !!}
+            </td>
         </tr>
         @endforeach
 
