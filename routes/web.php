@@ -58,3 +58,7 @@ Route::get('/produtoupdate', [ProdutoController::class, 'update']);
 // exclui um produto [DELETE]
 Route::get('/produtodestroy/{id}', [ProdutoController::class, 'destroy']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
