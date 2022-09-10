@@ -14,8 +14,13 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //listar todos os produtos
 
+        $var  = 0;
+        $var  = 20;
+        $var += 30;
+        echo($var);
+
+        //listar todos os produtos
         $produtos = Produto::orderBy('nome', 'ASC')->get();
         return view('produto.produto_index', ['produtos' => $produtos]);
     }
@@ -38,6 +43,7 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
+
         //dd($request->all());
 
         $messages = [
@@ -52,7 +58,7 @@ class ProdutoController extends Controller
             'quantidade'    => 'required|integer',
             'valor'         => 'required',
         ], $messages);
-        
+
         $produto = new Produto;
         $produto->nome          = $request->nome;
         $produto->quantidade    = $request->quantidade;
