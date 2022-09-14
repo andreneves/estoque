@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Produto;
+use App\Models\Categoria;
 
-class ProdutoController extends Controller
+class CategoriaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class ProdutoController extends Controller
     public function index()
     {
 
-        //listar todos os produtos
-        $produtos = Produto::orderBy('nome', 'ASC')->get();
-        return view('produto.produto_index', ['produtos' => $produtos]);
+        //listar todos os categorias
+        $categorias = Categoria::orderBy('nome', 'ASC')->get();
+        return view('categoria.categoria_index', ['categorias' => $categorias]);
     }
 
     /**
@@ -27,7 +27,7 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        return view('produto.produto_create');
+        return view('categoria.categoria_create');
     }
 
     /**
@@ -44,23 +44,17 @@ class ProdutoController extends Controller
         $messages = [
             'nome.required'  => 'O campo :attribute é obrigatorio!',
             'nome.min'       => 'O :attribute precisa ter no mínimo :min.',
-            'quantidade.required'     => 'O :attribute é obrigatório!',
-            'quantidade.integer'     => 'O :attribute é obrigatória!'
         ];
 
         $validated = $request->validate([
             'nome'          => 'required|min:8',
-            'quantidade'    => 'required|integer',
-            'valor'         => 'required',
         ], $messages);
 
-        $produto = new Produto;
-        $produto->nome          = $request->nome;
-        $produto->quantidade    = $request->quantidade;
-        $produto->valor         = $request->valor;
-        $produto->save();
+        $categoria = new Categoria;
+        $categoria->nome          = $request->nome;
+        $categoria->save();
 
-        return redirect('/produto')->with('status', 'Produto criado com sucesso!');
+        return redirect('/categoria')->with('status', 'Categoria criado com sucesso!');
 
     }
 
@@ -72,10 +66,8 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //dd('ENTROU NO SHOW');
-        $produto = Produto::find($id);
-        //dd($produto);
-        return view('produto.produto_show', ['produto' => $produto]);
+        $categoria = Categoria::find($id);
+        return view('categoria.categoria_show', ['categoria' => $categoria]);
 
     }
 
@@ -87,9 +79,8 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        $produto = Produto::find($id);
-        //dd($produto);
-        return view('produto.produto_edit', ['produto' => $produto]);
+        $categoria = Categoria::find($id);
+        return view('categoria.categoria_edit', ['categoria' => $categoria]);
     }
 
     /**
@@ -101,14 +92,11 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //dd('UPDATE');
-        $produto = Produto::find($id);
-        $produto->nome          = $request->nome;
-        $produto->quantidade    = $request->quantidade;
-        $produto->valor         = $request->valor;
-        $produto->save();
+        $categoria = Categoria::find($id);
+        $categoria->nome          = $request->nome;
+        $categoria->save();
 
-        return redirect('/produto')->with('status', 'Produto atualizado com sucesso!');
+        return redirect('/categoria')->with('status', 'Categoria atualizado com sucesso!');
 
     }
 
@@ -121,10 +109,10 @@ class ProdutoController extends Controller
     public function destroy($id)
     {
         //dd('DESTROY');
-        $produto = Produto::find($id);
-        $produto->delete();
+        $categoria = Categoria::find($id);
+        $categoria->delete();
 
-        return redirect('/produto')->with('status', 'Produto excluido com sucesso!');
+        return redirect('/categoria')->with('status', 'Categoria excluido com sucesso!');
 
     }
 }
